@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "jsdom": "^18.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

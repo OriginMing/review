@@ -1,0 +1,12 @@
+h1{
+    color: red;
+}
+:fullscreen{
+    color: red;
+}
+.content{
+    user-select: none;
+}
+.bg-image{
+    background-image: url("../image/dog.jpg");
+}
