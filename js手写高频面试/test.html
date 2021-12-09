@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="./18_debounce.js"></script>
 <body>
     <div></div>
     <script>
@@ -18,8 +19,16 @@
     })
     const d = document.querySelector('div')
     d.appendChild(a)
-    
 }
+
+var handel = debounce(function(){
+    console.log("aaaa");
+},3000)
+window.onresize=function(){
+  handel()
+};
+
+
     </script>
 </body>
 </html>

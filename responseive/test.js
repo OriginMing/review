@@ -12,3 +12,5 @@ Object.defineProperty(obj,'xxx',{
 console.log(obj.xxx);
 obj.xxx = 'hahah'
 console.log(obj.xxx);
+
+
