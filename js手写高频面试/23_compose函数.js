@@ -12,6 +12,7 @@ function test3(arg){
     return arg+7
 }
 const a = compose(test1,test2,test3);
+console.log(a);
 console.log(a(1));
 /* compose函数实现 */
 /* function compose(...rest){
@@ -24,11 +25,11 @@ console.log(a(1));
       );
 } */
 function compose(...fn){
-   return fn.reduce((pre,cur)=>(...args)=>cur(pre(...args)))
+   return fn.reduce( (pre,cur)=> {return (...args)=>cur(pre(...args)) })
 }
-function compose(...fn){
+/* function compose(...fn){
     return fn.reduce((pre,cur)=>(...args)=>pre(cur(...args)))
-}
+} */
 /* 
  */
 /* function first(...args){

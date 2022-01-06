@@ -12,4 +12,24 @@ function curry(...args){
   }
   return handlerArgs
 }
- console.log(curry(1)(2)(3).toString());
+console.log(curry(1)(2)(3));
+
+
+
+ function currying(fn) {
+  const length = fn.length;
+  const res = (...allArgs) => {
+    if (allArgs.length >= length) {
+      return fn.call(this,...allArgs);//call是因为 const a = currying(add);，如果调用者传入了this那就必须保证fn执行时this指向此绑定
+    } else {
+      return function curry2(...args){
+          //return res(args.concat(allArgs))
+          return res.call(this,...args,...allArgs)
+      };
+    }
+  };
+  return res;
+}
+ const add = (a, b, c) => a + b + c;
+ const a = currying(add);
+console.log(a(1,3)(20));

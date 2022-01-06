@@ -9,34 +9,38 @@ class MyPromise{
         this._status = Status.PENDING;
         this._value = undefined;
         this._reason = undefined;
-        this._resolveQueue = [];
-        this.onRejectedCallbacks= [];
+        this._resolveQueue = []; //resolve的所有函数,
+        //promise.then()
+        //promise.then()实现 多个 then里的都执行
+        this._rejectQueue = []; 
         const resolve = (value)=>{
-            const run = () => {
-                if(this._status==Status.PENDING){
-                    this._status = Status.FUFILLED
-                    this._value = value
-             while (this._resolveQueue.length) {
-                const callback = this._resolveQueue.shift()
-                callback(value)
-            }
-                }
-            }
-            setTimeout(run)
+          queueMicrotask(() => {
+            if(this._status==Status.PENDING){
+              this._status = Status.FUFILLED
+              this._value = value
+              while (this._resolveQueue.length) {
+              const callback = this._resolveQueue.shift()
+              callback(value)
+         }
+          }
+          });
+            //定时器保证执行前  then函数传递的函数已经被保存到 相应的队列里
+            //promise 异步为 微任务 所以我们用 queueMicrotask代替
+      
         }
         const reject = reason => {
-            const run = () => {
-                if (this._status === Status.PENDING) {
-                this._status = Status.REJECTED
-                this._reason = reason
-                while (this._rejectQueue.length) {
-                    const callback = this._rejectQueue.shift()
-                    callback(reason)
-                }
+                  queueMicrotask(() => {
+                    if (this._status === Status.PENDING) {
+                    this._status = Status.REJECTED
+                    this._reason = reason
+                    while (this._rejectQueue.length) {
+                        const callback = this._rejectQueue.shift()
+                        callback(reason)
+                    }
+                  }
+                  });
         }
-    }
-    setTimeout(run)
-        }
+        //执行 代码中出错也会进入到 reject中
         try {
             executor(resolve, reject)
         } catch (error) {
@@ -44,26 +48,26 @@ class MyPromise{
         }
     }
     then(onFulfilled, onRejected) {
-          // 根据规范，如果then的参数不是function，则忽略它, 让值继续往下传递，链式调用继续往下执行
+          // 根据规范，如果then的参数不是function，则将它变为函数,接收resolve的值, 让值继续往下传递，链式调用继续往下执行
         typeof onFulfilled !== 'function' ? onFulfilled = value => value : null
-        typeof onRejected !== 'function' ? onRejected = error => error : null
-      /*   if (this._status === Status.FUFILLED) {
-          onFulfilled(this._value)
+        typeof onRejected !== 'function' ? onRejected = error => {throw error} : null
+/*       if (this._status === Status.FUFILLED) {
+          onFulfilled(this._value)  //这样放在定时器里的 promise.then过来也可以被执行到
         }
         if (this._status === Status.REJECTED) {
          onRejected(this._reason)
         }
         if (this._status === Status.PENDING) {
             // 如果promise的状态是 pending，需要将 onFulfilled 和 onRejected 函数存放起来，等待状态确定后，再依次将对应的函数执行
-            this.onResolvedCallbacks.push(() => {
-              onFulfilled(this._value)
+            this._resolveQueue.push((data) => {
+              onFulfilled(data)
             });
       
             // 如果promise的状态是 pending，需要将 onFulfilled 和 onRejected 函数存放起来，等待状态确定后，再依次将对应的函数执行
-            this.onRejectedCallbacks.push(()=> {
-              onRejected(this._reason);
+            this._rejectQueue.push((reason)=> {
+              onRejected(reason);
             })
-          } */
+          }  */
           return new MyPromise((resolve, reject) => {
             const resolveFn = value => {
               try {
@@ -77,26 +81,31 @@ class MyPromise{
           const rejectFn = error => {
             try {
               const x = onRejected(error)
-              x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+              x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)//promise 的 reject链式调用 return  也是reslove
             } catch (error) {
               reject(error)
             }
           }
           switch (this._status) {
-            case STATUS.PENDING:
+            case Status.PENDING:
               this._resolveQueue.push(resolveFn)
               this._rejectQueue.push(rejectFn)
               break;
-            case STATUS.FULFILLED:
+            case Status.FUFILLED:
               resolveFn(this._value)
               break;
-            case STATUS.REJECTED:
-              rejectFn(this._value)
+            case Status.REJECTED:
+              rejectFn(this._reason)
               break;
           }
-
         })
         }
+    catch(onRejected){
+     return  this.then(undefined,onRejected)
+    }
+    finally(onFinally){
+      this.then(onFinally,onFinally)
+    } 
 // 静态resolve方法
  static resolve(value) {
     return value instanceof MyPromise ? value : new MyPromise(resolve => resolve(value))
@@ -106,18 +115,17 @@ static reject(error) {
     return new MyPromise((resolve, reject) => reject(error))
   }
    // 静态all方法
+   //Promise.all([p1,p2,p3])  //["p1res","p2res",""]
  static all(promiseArr) {
-    let count = 0
     let result = []
-    return new MyPromise((resolve, reject) =>       {
+    return new MyPromise((resolve, reject) =>{
       if (!promiseArr.length) {
         return resolve(result)
       }
-      promiseArr.forEach((p, i) => {
-        MyPromise.resolve(p).then(value => {
-          count++
-          result[i] = value
-          if (count === promiseArr.length) {
+      promiseArr.forEach(promise => {
+        promise.then(value => {
+          result.push(value)
+          if (result.length === promiseArr.length) {
             resolve(result)
           }
         }, error => {
@@ -126,14 +134,53 @@ static reject(error) {
       })
     })
   }
+  //allsetteled,等所有的 都resolve不执行reject 
+
+  static allSetteled(promiseArr) {
+    let result = []
+    return new MyPromise((resolve, reject) =>{
+      if (!promiseArr.length) {
+        return resolve(result)
+      }
+      promiseArr.forEach(promise => {
+        promise.then(value => {
+          result.push({Status:Status.FUFILLED,value:value})
+          if (result.length === promiseArr.length) {
+            resolve(result)
+          }
+        }, error => {
+          result.push({Status:Status.REJECTED,reason:error})
+          if (result.length === promiseArr.length) {
+            resolve(result)
+          }
+        })
+      })
+    })
+  }
  // 静态race方法
  static race(promiseArr) {
     return new MyPromise((resolve, reject) => {
-      promiseArr.forEach(p => {
-        MyPromise.resolve(p).then(value => {
+      promiseArr.forEach(promise => {
+        promise.then(value => {
           resolve(value)
         }, error => {
           reject(error)
+        })
+      })
+    })
+  }
+//any至少有一个resolve
+  static any(promiseArr) {
+    let reason = []
+    return new MyPromise((resolve, reject) => {
+      promiseArr.forEach(promise => {
+      promise.then(value => {
+          resolve(value)
+        }, error => {
+          reason.push(error)
+          if (result.length === promiseArr.length) {
+          reject(new AggregateError(reason)) //AggregateError 需要浏览器来测,把所有的错误放在一块 通过.errors 取出来
+          }
         })
       })
     })
@@ -146,15 +193,16 @@ static reject(error) {
 },(err)=>{
     console.log(err);
 }) */
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('成功');
-    },1000);
-  }).then(
-    (data) => {
-      console.log('success', data)
-    },
-    (err) => {
-      console.log('faild', err)
-    }
-  )
+const promise = new MyPromise((resolve, reject) => {
+     resolve('成功');
+     //reject("shibai")
+  })
+
+  promise.then((data) => {console.log('success', data) },(err) => {console.log('faild', err)}).then((data)=>{console.log("success2",data)},(err)=>{console.log("faild2",err)})
+
+/*  promise.then((data) => {console.log('success3', data) },(err) => {console.log('faild3', err)})
+  setTimeout(() => {
+    promise.then((data)=>{console.log("success4",data)},(err)=>{console.log("faild4",err)})
+  }, 2000); */
+  //promise.then()
+  //promise.then()
