@@ -1,0 +1,14 @@
+a{
+    text-decoration: none; /* 去除默认的下划线 */
+    color: #000; 
+}
+a.link-active {
+    color: red;
+    font-weight: bold;
+  }
+
+a.active {
+    color: orange;
+    font-size: 20px;
+  }
+  
