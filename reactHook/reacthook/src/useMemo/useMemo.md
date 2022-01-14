@@ -1,0 +1,2 @@
+#useMemo实际的目的也是为了进行性能的优化。
+# useMemo和useCallBack差不多 ，不同点在于 usememo是对一个函数的返回值进行记忆，而useCallback是函数
