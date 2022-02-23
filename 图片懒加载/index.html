@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./img/OIP-C.jfif" alt="">
+    <ul id="imglist"></ul>
+    <div style="display: none;" id="data">
+     [
+     {"img":"./img/OIP-C.jfif","name":"图片1"},
+     {"img":"./img/OIP-C (1).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (2).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (3).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (4).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (5).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (6).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (7).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (8).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (9).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (10).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (11).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (12).jfif","name":"图片1"},
+     {"img":"./img/OIP-C (13).jfif","name":"图片1"}
+     ]
+    </div>
+    <script type="text/html" id="template">
+        <li class="img-item">
+            <div class="img-wrapper">
+                <img src="./img/loading-gif-png-5.gif" data-src="{{img}}" alt="">
+            </div>
+            <div class="imgName">
+                <h1>{{name}}</h1>
+            </div>
+        </li>
+    </script>
+</body>
+<script src="./index.js"></script>
+</html>

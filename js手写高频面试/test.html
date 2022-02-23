@@ -10,8 +10,8 @@
 <body>
     <div></div>
     <script>
-        for(let i = 0;i<10;i++){
-    a = document.createElement('a')
+    for(var i = 0;i<10;i++){
+            a = document.createElement('a')
     a.innerHTML = i + '<br>'
     a.addEventListener('click',function(e){
      e.preventDefault()
@@ -19,7 +19,7 @@
     })
     const d = document.querySelector('div')
     d.appendChild(a)
-}
+        }
 
 var handel = debounce(function(){
     console.log("aaaa");

@@ -33,6 +33,7 @@ class Scheduler{
     }
     taskStart(){
         for (let i = 0; i < this.maxCount; i++) {
+            console.log("22");
             this.request();
           }
     }

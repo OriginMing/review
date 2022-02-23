@@ -10,8 +10,12 @@ ReactDOM.render(
  </Provider>,
   document.getElementById('root')
 );
-/*   <StoreContext.Provider value={store}>
-    <App />
-  </StoreContext.Provider>, */
 
+  
+//   ReactDOM.render(
+//     <StoreContext.Provider value={store}>
+// <App />
+// </StoreContext.Provider>, 
+//     document.getElementById('root')
+//   );
 

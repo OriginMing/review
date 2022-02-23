@@ -29,8 +29,9 @@ methods:{
         this.list.push(`${Date.now()}`)
         this.list.push(`${Date.now()}2`)
         this.list.push(`${Date.now()}3`)
+        console.log(this.$refs.text.childNodes);
         this.$nextTick(()=>{
-        console.log( this.$refs.text.childNodes);
+        console.log(this.$refs.text.childNodes);
         })
     },
     jump(){

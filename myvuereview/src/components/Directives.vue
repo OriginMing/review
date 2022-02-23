@@ -6,7 +6,7 @@
     <input type="text"  v-model.lazy="inputContent"/>
     <h1>表单双向绑定的值：{{inputContent}}</h1>
     头部
-     <slot></slot>
+     <slot>"xxxxxxxxxxxx"</slot>
      内容
      <slot name='hasNameSlot'></slot>
      尾部

@@ -16,5 +16,7 @@ store.dispatch(addAction(15));
 store.dispatch(subAction(8));
 store.dispatch(subAction(5));
 store.dispatch(subAction(5)); */
-store.dispatch(chanAction(4))
-store.dispatch(chanAction(5))
+// store.dispatch(subAction(0))
+// store.dispatch(chanAction(4))
+// store.dispatch(chanAction(5))
+store.dispatch({type:"xxx"})

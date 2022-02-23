@@ -10,7 +10,7 @@ function about2(props){
           <hr />
           <h1>About</h1>
           <h2>当前计数: {props.counter}</h2>
-          <button onClick={e => props.decrement()}>-1</button>
+          <button onClick={e => {props.decrement();console.log(props.counter)}}>-1</button>
           <button onClick={e => props.subNumber(5)}>-5</button>
         </div>
       )

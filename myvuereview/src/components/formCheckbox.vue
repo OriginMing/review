@@ -11,7 +11,7 @@ import CustomVModelVue from "./CustomVModel.vue"
 export default {
   data(){
       return{
-          muui:''
+          muui:true
       }
   },
   components:{

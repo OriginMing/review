@@ -55,20 +55,20 @@ function reactive(raw){
     })
     return raw
 }
-function reactive(raw) {
-    return new Proxy(raw, {
-      get(target, key) {
-        const dep = getDep(target, key);
-        dep.depend();
-        return target[key];
-      },
-      set(target, key, newValue) {
-        const dep = getDep(target, key);
-        target[key] = newValue;
-        dep.notify();
-      }
-    })
-  }
+// function reactive(raw) {
+//     return new Proxy(raw, {
+//       get(target, key) {
+//         const dep = getDep(target, key);
+//         dep.depend();
+//         return target[key];
+//       },
+//       set(target, key, newValue) {
+//         const dep = getDep(target, key);
+//         target[key] = newValue;
+//         dep.notify();
+//       }
+//     })
+//   }
 let activeEffect = null;
 function watchEffect(effect){
     activeEffect=effect;

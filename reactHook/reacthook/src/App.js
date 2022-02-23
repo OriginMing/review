@@ -1,5 +1,11 @@
 import { createContext } from "react";
 import SwitchTransitionDemo from "./transition/switchTransition";
+import TransitionGroupDemo from "./transition/TransitionGroupDemo";
+import ReactIm from './React/index'
+import ReactImm from './React/非受控'
+import Ford from './React/forwordRef'
+import Fun from './React/父子传参函数'
+import Tai from './React/tai'
 import BasicUseImperativeHandle from "./useImperativeHandle/BasicUseImperativeHandle";
 /* import BasicUseState from "./useState/BasicUseState" */
 /* import BasicUseEffect from "./useEffect/BasicUseEffect"; */
@@ -36,15 +42,19 @@ function App() {
     {/* <BasicUseRef/> */}
     
     {/* <BasicUseImperativeHandle/> */}
-   {/*  <SwitchTransitionDemo></SwitchTransitionDemo> */}
+    {/* <SwitchTransitionDemo></SwitchTransitionDemo>
+    <TransitionGroupDemo></TransitionGroupDemo> */}
 
-
-   <UserContext.Provider value={{name:"xxxx",age:"18"}}>
+   {/* <UserContext.Provider value={{name:"xxxx",age:"18"}}>
          <ThemContext.Provider value={{fontSize:"30px",color:"red"}}>
          <UserHome/> 
          </ThemContext.Provider>
-         </UserContext.Provider>
-
+         </UserContext.Provider> */}
+{/* <ReactIm></ReactIm> */}
+{/* <ReactImm></ReactImm>
+<Ford></Ford> */}
+{/* <Fun></Fun> */}
+<Tai></Tai>
     </div>
   );
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+  <style>
+      .container{
+          display: grid;
+          width: 50%;
+          grid-template-columns: repeat(3,33.3%);
+          grid-template-columns: repeat(auto-fill,100px);
+          /*格布局提供了fr关键字（fraction 的缩写，意为"片段"）。如果两列的宽度分别为1fr和2fr，就表*/
+          /* minmax()函数产生一个长度范围，表示长度就在这个范围之中。它接受两个参数，分别为最小值和最大值。 */
+          grid-template-columns: 1fr 1fr minmax(100px, 1fr);
+          grid-template-rows: 100px 100px 100px;
+          /* 如果将设置改为column dense，表示"先列后行"，并且尽量填满空格 */
+          /* 默认值为 row 先行后列，不填满空格 */
+          /* grid-auto-flow: column dense; */
+          grid-row-gap: 20px;
+          grid-column-gap: 20px;
+      }
+      .container div:nth-child(1){
+          background-color: red;
+      }
+      .container div:nth-child(2){
+          background-color: yellow;
+      }
+      .container div:nth-child(3){
+          background-color: green;
+      }
+      .container div:nth-child(4){
+          background-color: black;
+      }
+  </style>
+<body>
+<div class="container">
+    <div style="width: 50px;height:50px;"><p>1</p></div>
+    <div style="width: 50px;height:50px;"><p>2</p></div>
+    <div><p>3</p></div>
+    <div><p>3</p></div>
+  </div>
+</body>
+</html>

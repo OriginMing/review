@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
+import {connect,useSelector,shallowEqual,useDispatch} from "react-redux";
 
 import { 
     decAction,
     subAction
   } from "../store/actionCreate";
-function about2(props){
+function About2(props){
     return (
         <div>
           <hr />
@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(about2)
+export default connect(mapStateToProps,mapDispatchToProps)(About2)

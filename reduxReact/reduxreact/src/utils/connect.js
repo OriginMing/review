@@ -25,7 +25,7 @@ function connect(mapStateToProps,mapDispatchToProps){
           render() {
               return (
                 <WrappedComponent {...this.props} 
-                {...mapStateToProps(this.context.getState())} 
+                {...mapStateToProps(this.context.getState())}
                 {...mapDispatchToProps(this.context.dispatch)}
                 >
                 </WrappedComponent>
@@ -37,4 +37,6 @@ function connect(mapStateToProps,mapDispatchToProps){
   }
 }
 export default connect
+
+
 

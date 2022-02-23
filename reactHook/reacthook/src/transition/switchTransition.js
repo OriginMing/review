@@ -17,10 +17,11 @@ export default class SwitchTransitionDemo extends PureComponent {
 
     return (
       <div>
-        <SwitchTransition mode="out-in">
+        <SwitchTransition mode="in-out">
           <CSSTransition key={isOn ? "on": "off"}
                          classNames="btn"
-                         timeout={1000}>
+                         timeout={3000}
+                         >
             <button onClick={e => this.setState({isOn: !isOn})}>
               {isOn ? "on": "off"}
             </button>
@@ -29,4 +30,23 @@ export default class SwitchTransitionDemo extends PureComponent {
       </div>
     )
   }
+  // state = {show: true};
+  // onToggle = () =>  this.setState({show: !this.state.show});
+  // render() {
+  //   const {show} = this.state;
+  //   return (
+  //     <div>
+  //       <div className={'square-wrapper'}>
+  //         <CSSTransition
+  //           in={show}
+  //           timeout={500}
+  //           classNames={'fade'}
+  //         >
+  //       <button onClick={this.onToggle}>toggle</button>
+  //         </CSSTransition>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
 }

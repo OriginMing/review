@@ -166,9 +166,16 @@ fn(1,2,3)
 显示大于隐式
 bind 返回的函数，无法用apply和call改变this
 但是可以通过 new Bind返回的函数() 来改变新函数的指向
-function foo(){console.log(this)};
-let bat = foo.bind("aaa");
-bat.apply("xxx");
+function foo(something) {
+    this.a = something
+}
+var obj1 = {}
+var bar = foo.bind(obj1)  // 返回一个新函数bar，这个新函数内的this指向了obj1  (1)
+bar(2) // this绑定在了Obj1上，所以obj1.a === 2
+console.log(obj1.a)
+var baz = new bar(3)  // 调用new 操作符后，bar函数的this指向了返回的新实例baz  (2)
+console.log(obj1.a)
+console.log(baz.a) 
 ```
 
 ### 特殊的绑定（间接函数引用）
@@ -193,7 +200,6 @@ _this.data = result
 }
 }
 obj.getData
-
 
 setTimeout(()=>{
 var result = ["abc","cba"];
@@ -831,5 +837,17 @@ export {
       
 import 函数import(".js").then(res=>{})      
 import 作为对象，有meta 属性  console.log(import.meta)
+```
+
+```
+改变原数组：pop(删除最后一个)、push(追加一个或多个)、unshift() 、reverse()、shift(删除第一个元素)、sort()、splice()
+不会更改现有数组，而是返回一个新数组：concat,filter,map,slice()
+前闭后开 [0,3) 包含零不包含三  .fill('1',0,3)   .slice
+find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined
+,every() 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值,若收到一个空数组，此方法在一切情况下都会返回 true。
+findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。若没有找到对应元素则返回-1。
+flat() 数组扁平化
+jion()数组变为字符串
+String.split()，字符串转变为数组
 ```
 

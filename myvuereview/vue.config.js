@@ -9,8 +9,26 @@ module.exports = {
                 }
             }
         )
+        config.module.rules.push(
+            {
+                test:  /\.(png|jpg|gif|jfif)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "file-loader",
+                }
+            }
+        )
     },
     devServer:{
-        open:true
+        open:true,
+        proxy: {
+            '': {
+              target: 'http://152.136.185.210:4000',
+              pathRewrite: {
+                '^/api': ''
+              },
+              changeOrigin: true
+            }
+          }
     }
 }

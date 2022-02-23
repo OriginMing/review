@@ -26,7 +26,7 @@ function homeReducer(state = homeState,action){
   const bannerState = {
     banner : []
 }
-  function bannerReducer(state = bannerState,action){
+function bannerReducer(state = bannerState,action){
     switch(action.type){
         case CHANGE_BANNER:
             state.banner.push(action.banner)
@@ -35,7 +35,7 @@ function homeReducer(state = homeState,action){
               return state;
           }
     }
-    function reducer(state = {},action){
+function reducer(state = {},action){
         return{
             homeInfo:homeReducer(state.homeInfo,action),
             bannerInfo :bannerReducer(state.bannerInfo,action)
