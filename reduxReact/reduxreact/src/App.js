@@ -1,4 +1,4 @@
-import About from "./pages/about3";
+import About from "./pages/about2";
 import Home from "./pages/home4";
 
 function App() {

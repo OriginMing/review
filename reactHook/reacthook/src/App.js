@@ -6,6 +6,8 @@ import ReactImm from './React/非受控'
 import Ford from './React/forwordRef'
 import Fun from './React/父子传参函数'
 import Tai from './React/tai'
+import UseRefAndCre from './React/useRef和createRef'
+import UseContext from './React/UseContext'
 import BasicUseImperativeHandle from "./useImperativeHandle/BasicUseImperativeHandle";
 /* import BasicUseState from "./useState/BasicUseState" */
 /* import BasicUseEffect from "./useEffect/BasicUseEffect"; */
@@ -18,6 +20,7 @@ import BasicUseContext from "./useContext/BasicUseContext";
 /* import BasicUseRef from "./useRef/BasicUseRef"; */
 import UserHome from "./高阶组件/UserHome"
 import {ThemContext,UserContext} from "./context"
+import AboutArrow from './React/aboutArrowFun'
 
 function App() {
   return (
@@ -54,7 +57,13 @@ function App() {
 {/* <ReactImm></ReactImm>
 <Ford></Ford> */}
 {/* <Fun></Fun> */}
-<Tai></Tai>
+{/* <Tai></Tai> */}
+{/* <UseRefAndCre></UseRefAndCre> */}
+<ThemContext.Provider  value={{color:"xxx"}}>
+<UseContext></UseContext>
+</ThemContext.Provider>
+
+{/* <AboutArrow></AboutArrow> */}
     </div>
   );
 }

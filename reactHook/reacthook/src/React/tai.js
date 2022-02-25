@@ -1,18 +1,43 @@
-import React, { useMemo,useState,memo } from 'react'
-const MyButton =memo((props) => {
-    console.log("Button重新渲染: " + props.title);
-    return <button >{props.info.age}</button>
-  })
-export default function BasicUseMemo() {
-    const [show, setShow] = useState(true);
-    const info = useMemo(()=>{
-       return {age:"18"}
-    },[])
+import React, { useRef,forwardRef,createRef } from 'react'
+
+const MyInput = forwardRef((props,ref)=>{
     return (
         <div>
-             <MyButton info={info} title="info"></MyButton>
-             <button onClick={e => setShow(!show)}>show切换</button>
+            <input type="text" ref={ref}/>
+        </div>
+    )
+  })
+  class MyClassInput extends React.Component{
+    constructor(props){
+       super(props);
+       this.inputRef = createRef();
+    }
+     render(){
+         return (
+             <div>
+            <input type="text" ref={this.inputRef}/>
+             </div>
+         )
+     }
+  }
+
+export default function BasicUseRef() {
+    const inputRef =  useRef()
+    const inputClassRef =  useRef()
+    function changeDom2(){
+      inputClassRef.current.inputRef.current.focus()
+       
+    }
+    function changeDom(){
+        console.log(inputRef.current);
+        inputRef.current.focus()
+    }
+    return (
+        <div>
+            <MyInput ref={inputRef} />
+            <MyClassInput ref={inputClassRef}/>
+            <button onClick={changeDom}>function聚焦</button>
+            <button onClick={changeDom2}>class聚焦</button>
         </div>
     )
 }
-

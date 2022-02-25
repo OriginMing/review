@@ -11,6 +11,7 @@ function connect(mapStateToProps,mapDispatchToProps){
             this.state = {
                 storeState:mapStateToProps(context.getState())
             }
+            console.log(context);
           } 
           componentDidMount() {
             this.unsubscribe = this.context.subscribe(() => {
