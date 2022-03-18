@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     html{
+
+     }
+     html,body{
+   width: 100vw;
+   perspective: 1px;
+   height: 100vh;
+   overflow-y: scroll;
+   overflow-x: hidden;
+
+ }
+.one{
+  width:50vw;
+  height:100vh;
+  background:#409eff;
+  transform: translateZ(-2px)scale(3);
+  -webkit-transform:translateZ(-2px)scale(3);
+}
+/* .two{
+  width:500px;
+  height:100vh;
+  background:#67c23a;
+  transform: translateZ(-1px)scale(2);
+  -webkit-transform:translateZ(-1px)scale(2);
+} */
+.three{
+  width:50vw;
+  height:100vh;
+  background:#e6a23c;
+  transform: translateZ(0px);
+  -webkit-transform:translateZ(0px);
+}
+
+</style>
+<body>
+        <div class="one">one</div>
+        <div class="three">three</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html,body{
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin: 0;
+    }
+.container{
+    background-color: rgb(30, 30, 30);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+    perspective: 1px;
+    position: relative;
+
+}
+
+.desc{
+    width: 65%;
+    color: rgb(80, 80, 80);
+    font-weight: 600;
+    font-size: 50px;
+    letter-spacing: 2px;
+    transform:  translateZ(-2px)scale(3) translateY(90%);
+    position: absolute;
+    top: 0%;
+    z-index: -1;
+
+;
+}
+img{
+    display: block;
+}
+img:nth-child(4n-1){
+    margin-left: 30%;
+ width: 200px;
+ margin-top:50px ;
+
+}
+img:nth-child(4n-2){
+    margin-left: 45%;
+ width: 200px;
+ margin-top:50px ;
+
+}
+img:nth-child(4n-3){
+ margin-left: 60%;
+ width: 200px;
+ margin-top:50px ;
+
+
+}
+img:nth-child(4n){
+    margin-left: 10%;
+ width: 200px;
+ margin-top:50px ;
+
+}
+
+</style>
+<body>
+    <div class="container"> 
+    <div class="imgC">
+    <div>  
+        <img src="./img/s1.jpg" alt="" class="left">
+        <img src="./img/s3.jpg" alt="" class="left">
+        <img src="./img/s5.jpg" alt="" class="left">
+        <img src="./img/s7.jpg" alt="" class="left">
+        <img src="./img/s9.jpg" alt="" class="left">
+        <img src="./img/s11.jpg" alt="" class="left">
+    </div> 
+    <div>
+        <img src="./img/s2.jpg" alt="" class="right">
+        <img src="./img/s4.jpg" alt="" class="right">
+        <img src="./img/s6.jpg" alt="" class="right">
+        <img src="./img/s8.jpg" alt="" class="right">
+        <img src="./img/s10.jpg" alt="" class="right">
+        <img src="./img/s12.jpg" alt="" class="right">
+    </div>
+      
+    </div>
+    <div style="" class="desc">
+        行走在人生旅途，我们触摸的是多棱的生活，无须为艰难哀叹，为挫败悲语；不必为虚无动情，
+        为沉沦失声。命运总有幸运与不幸，勿被顺境捆着了脚步，勿被厄运颓废了精神。其实，站得越高，
+        你的阴影越长；越是暗夜，就越接近光明。只要不停地校正前行的方向，我们就不会迷失自己。
+    </div>
+    </div>
+</body>
+</html>

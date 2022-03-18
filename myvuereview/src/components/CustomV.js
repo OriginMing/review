@@ -30,9 +30,9 @@ MyPlugin.install = function(Vue,options){
     Vue.directive('lazyimg',{
      bind(el,binding){
         el.src =defaultSrc
+        console.log(defaultSrc);
      },
      inserted(el,binding){
-         console.log(el.offsetTop);
         //  兼容处理，如果 浏览器支持 观察可视区 接口，就用 否则就滚动条
         if('IntersectionObserver' in window){
             MyPlugin.observe(el,binding.value);
@@ -104,6 +104,7 @@ MyPlugin.observe = function(el,realSrc){
     let io = new IntersectionObserver(entries => {
         console.log(entries[0].intersectionRatio);
         let img =  entries[0].target
+        console.log(el);
         if(entries[0].intersectionRatio > 0){
             //进入可见区域 加载图片
             el.src=realSrc

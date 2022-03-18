@@ -30,6 +30,6 @@ console.log(curry(1)(2)(3));
   };
   return res;
 }
- const add = (a, b, c) => a + b + c;
+ const add = (a, b, c) => a * b + c;
  const a = currying(add);
 console.log(a(1,3)(20));

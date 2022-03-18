@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html{
+        overflow-x: hidden;
+        height: 100%;
+    }
+    body {
+   perspective: 1px;
+   -webkit-perspective: 1px;
+   height: 100%;
+   overflow-y: scroll;
+   overflow-x: hidden;
+ }
+ #app{
+   width: 100vw;
+   height:200vh;
+   transform-style: preserve-3d;
+   perspective-origin: 100% 50%;
+
+ }
+.one{
+  width:500px;
+  height:500px;
+  background:#409eff;
+  transform: translateZ(-2px);
+  -webkit-transform:translateZ(-2px);
+}
+.two{
+  width:500px;
+  height:500px;
+  background:#67c23a;
+  transform: translateZ(-1px);
+  -webkit-transform:translateZ(-1px);
+}
+.three{
+  width:500px;
+  height:500px;
+  background:#e6a23c;
+  transform: translateZ(0px);
+  -webkit-transform:translateZ(0px);
+}
+</style>
+<body>
+  
+    <div id="app">
+        <div class="one">one</div>
+        <div class="two">two</div>
+        <div class="three">three</div>
+    </div>
+</body>
+<script>
+    function pro(obj){
+   Object.keys(obj).map(item=>{
+       let value2 = obj[item]
+       Object.defineProperty(obj,item,{
+           get(){
+               console.log('我被访问了')
+               return  value2  
+           },
+           set(newvalue){
+               console.log('我被改变了');
+               value2 = newvalue
+           }
+       })
+   })
+   return obj
+}
+let obj = {hh:"xixi"}
+let testDefine = pro(obj)
+obj.hh
+obj.hh="改变"
+obj.hh
+</script>
+
+<script>
+//     let value = 1
+//    let a =  new Number(1)
+//    a.valueOf = function(){
+//        return value++
+//    }
+//    if(a==1&a==2&a==3){
+//        alert("yes")
+//    }
+</script>
+
+</html>

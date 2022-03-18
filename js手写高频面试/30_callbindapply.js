@@ -18,7 +18,23 @@ Function.prototype.myCall = function (context, ...args) {
       context[fn] = this;
       return context[fn](...args)
  }
-
+ Function.prototype.myBind = function(context,...rest){
+    if(!context){
+      context = window
+    }
+    return (...rest2)=>{
+      this.apply(context,[...rest,...rest2])
+    }
+ }
+ var foo = {
+   value :1
+ }
+ var bar = function(name,age){
+   console.log(name,age);
+   console.log(this);
+ }
+ var result = bar.myBind(foo,'anny')
+ result(22)
   
 
 

@@ -36,7 +36,7 @@ function getDep(target,key){
        let dep = getDep(raw,key)
        Object.defineProperty(raw,key,{
            get(){
-               dep.depend()
+            dep.depend()
              return value  
            },
            set(newValue){

@@ -19,12 +19,12 @@
 <!-- <NextTickVue></NextTickVue> -->
 <!-- <AsyncLoadComponentVue></AsyncLoadComponentVue> -->
  <!--  <el-button type="primary">主要按钮</el-button> -->
- <!-- <SlotApi> -->
- <!-- <template v-slot:prepend>前面</template>
- <template v-slot:append>后面</template> -->
+ <SlotApi>
+ <template v-slot:prepend>前面</template>
+ <template v-slot:append>后面</template>
  <!-- <slot slot='prepend'>前面</slot>
  <slot slot='append'>后面</slot> -->
- <!-- </SlotApi> -->
+ </SlotApi>
  <!-- <WxFriends></WxFriends> -->
  <!-- <van-field v-model="text" label="文本" /> -->
  <!-- <Custom
@@ -40,8 +40,8 @@
    
  <!-- <div @click.prevent="requestSend()">测试axios封装</div>
  <input type="text" v-test.bar='1+1'>
- <button v-throttle='{time:5000,func:requestSend}'>测试</button>
- <div> <img v-lazyimg="require('@/img/o.jfif')" alt="">
+ <button v-throttle='{time:5000,func:requestSend}'>测试</button> -->
+ <!-- <div> <img v-lazyimg="require('@/img/o.jfif')" alt="">
 </div>
 <div> <img v-lazyimg="require('@/img/o1.jfif')" alt="">
 </div>
@@ -63,8 +63,10 @@
 </div>
 <div> <img v-lazyimg="require('@/img/o10.jfif')" alt="">
 </div> -->
-  <button v-copy="copyText">copy</button>
-  <input type="text" v-model="copyText"> {{copyText}}
+  <!-- <button v-copy="copyText">copy</button>
+  <input type="text" v-model="copyText"> {{copyText}} -->
+
+  <!-- <TestObj></TestObj> -->
   <router-view/>
   </div>
 </template>
@@ -84,6 +86,8 @@ import WxFriends from './components/WxFriends.vue'
 import Custom from './components/二次封装elementButton.vue'
 import Sync from '@/components/Sync.vue'
 import wmReuest from './service/index.js'
+import TestObj from '@/components/vfor遍历对象.vue'
+import Vue from "vue"
 export default {
   name: 'App',
   data(){
@@ -116,22 +120,25 @@ export default {
     SlotApi,
     WxFriends,
     Custom,
-    Sync
+    Sync,
+    TestObj
   },
    mounted() {
      let a = require.context('./components/', true,/\.js$/).keys();
+     console.log(this.$bus);
    },
    
   methods:{
     selfMethod(...res){
      console.log(res);
     },
-    _handleConfirm(){
-      console.log("确认");
+    _handleConfirm(e){
+      console.log("确认",e);
       this.visibleDialog=false
     },
     _handleCancel(){
       console.log("取消");
+      
       this.visibleDialog = false
     },
     requestSend(){
@@ -142,7 +149,6 @@ export default {
         url:'/get',
         params:{xx:"xxx"},
         showLoading:false
-
       }).then(res=>{
         console.log(res);
       });

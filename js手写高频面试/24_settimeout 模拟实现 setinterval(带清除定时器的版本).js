@@ -29,3 +29,5 @@ function imitateSetTimeout(fn,duration){
 imitateSetTimeout(()=>{
     console.log("xxx")
 },2000)
+
+

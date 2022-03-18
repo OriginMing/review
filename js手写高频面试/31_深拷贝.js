@@ -10,10 +10,13 @@ function deepClone(obj,hash=new WeakMap()){
     hash.set(obj,target);
     Reflect.ownKeys(obj).forEach((item)=>{
         if(isObject(obj[item])){
-            target[item] =deepClone(obj[item],hash)
+            target[item] =deepClone(obj[item],v)
         }else{
             target[item] = obj[item]
         }
     })
     return target
 }
+
+let a = [1,2,3]
+console.log(deepClone(a)); 

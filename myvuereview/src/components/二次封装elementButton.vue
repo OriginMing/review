@@ -28,12 +28,19 @@ export default {
    methods: {
     // 对外抛出cancel事件
     _handlCeancel() {
-      this.$emit("cancel");
+      this.$emit("cancel",1);
     },
     // 对外抛出 confirm事件
     _handleConfirm() {
-      this.$emit("confirm");
+      this.$emit("confirm",1);
     }
+    //   _handlCeancel() {
+    //   this.$emit("update:visible",false);
+    // },
+    // // 对外抛出 confirm事件
+    // _handleConfirm() {
+    //   this.$emit("update:visible",false);
+    // }
 }
 }
 </script>

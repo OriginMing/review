@@ -7,6 +7,7 @@ function myNew(fn, ...args) {
       return res;
     } */
     /* 注释里的东西没明白想干嘛 */
+    //现在明白了 因为 如果fn 有返回对象或者函数那么就返回 ，和原生的new 实现有关
     return obj;
   }
    function Person(name, age) {
@@ -20,5 +21,7 @@ function myNew(fn, ...args) {
  let p1 = myNew(Person, "lihua", 18);
  console.log(p1.name);
 p1.say();
+
+
 
   

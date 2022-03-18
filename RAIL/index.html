@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script type="text/x-template" id="temp">
+        <div>
+            <h3 >一次性渲染10万条数据{{count}}</h3>
+            <ul id="container">
+              <li v-for="(item, index) in list" :key="index">
+                {{ item }}
+              </li>
+            </ul>
+            <div style="position: fixed;bottom:0;right:0">{{count}}</div>
+          </div>
+      </script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            template: "#temp",
+            data() {
+                return {
+                    list: [],
+                    count: 0
+                }
+            },
+            mounted() {
+                this.loop()
+            },
+            methods: {
+                loop() {
+                    if (this.count > 100000) {
+                        return;
+                    }
+                    this.updateList(this.count)
+                    requestAnimationFrame((now) => {
+        this.loop();
+      })
+                },
+                updateList(start) {
+                    for (let i = start; i < start + 20; i++) {
+                        this.list.push(i)
+                    }
+                    this.count += 20
+                }
+            }
+        })
+    </script>
+    <script>
+        // 性能指标检测
+        // window.addEventListener('load',(event)=>{
+        // let timing = performance.getEntriesByType('resource')[0];
+        // console.log(timing.responseEnd - timing.fetchStart)
+        // })
+
+    </script>
+</body>
+
+</html>

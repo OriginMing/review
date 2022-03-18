@@ -18,10 +18,9 @@ class MyPromise{
             if(this._status==Status.PENDING){
               this._status = Status.FUFILLED
               this._value = value
-              while (this._resolveQueue.length) {
-              const callback = this._resolveQueue.shift()
-              callback(value)
-         }
+               this._resolveQueue.forEach(fn=>{
+                 fn(value)
+               })
           }
           });
             //定时器保证执行前  then函数传递的函数已经被保存到 相应的队列里
@@ -40,7 +39,7 @@ class MyPromise{
                   }
                   });
         }
-        //执行 代码中出错也会进入到 reject中
+        //执行 代码中出错也会进入到 reject中  ,防止不调用then 就报错
         try {
             executor(resolve, reject)
         } catch (error) {
@@ -72,8 +71,8 @@ class MyPromise{
             const resolveFn = value => {
               try {
                 const x = onFulfilled(value)
-                // 分类讨论返回值,如果是Promise,那么等待Promise状态变更,否则直接resolve
-                x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+                // 分类讨论返回值,如果是Promise,那么等待Promise状态变更,变更之后执行x.then(),上一个promise就resolve掉了,否则直接resolve
+                x instanceof MyPromise ? x.then(resolve,reject) : resolve(x)
               } catch (error) {
                 reject(error)
               }
@@ -193,12 +192,20 @@ static reject(error) {
 },(err)=>{
     console.log(err);
 }) */
-const promise = new MyPromise((resolve, reject) => {
-     resolve('成功');
-     //reject("shibai")
-  })
 
-  promise.then((data) => {console.log('success', data) },(err) => {console.log('faild', err)}).then((data)=>{console.log("success2",data)},(err)=>{console.log("faild2",err)})
+// const promise = new MyPromise((resolve, reject) => {
+//     reject("成功")
+//      //reject("shibai")
+//   })
+
+//   promise.catch((res)=>{
+//     console.log("res",res);
+//   })
+//    promise.catch((res)=>{
+//     console.log("res",res);
+//   })
+
+  // promise.then((data) => {console.log('success', data) },(err) => {console.log('faild', err)}).then((data)=>{console.log("success2",data)},(err)=>{console.log("faild2",err)})
 
 /*  promise.then((data) => {console.log('success3', data) },(err) => {console.log('faild3', err)})
   setTimeout(() => {
@@ -206,3 +213,14 @@ const promise = new MyPromise((resolve, reject) => {
   }, 2000); */
   //promise.then()
   //promise.then()
+
+
+  // let p  = new Promise((resolve,reject)=>{
+  //   reject("1111")
+  // })
+  // p.then(res=>{
+  //   console.log(res);
+  // }).catch(err=>{
+  //   console.log(err);
+  // })
+
